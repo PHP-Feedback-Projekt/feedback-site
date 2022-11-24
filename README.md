@@ -1,2 +1,1 @@
-# feedback-site
-a website for webmaster certificate course
+# PHP Feedback webseite
