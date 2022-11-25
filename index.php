@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="password">Dein Password</label>
         <input type="text" name="password" id="password">
 
-        <?php if (isset($errocallbackrs['error_login_password'])) : ?>
+        <?php if (isset($callback['error_login_password'])) : ?>
             <div class="alert">
                 <?= $callback['error_login_password'] ?>
             </div>
