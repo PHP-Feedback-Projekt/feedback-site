@@ -23,3 +23,30 @@ function deleteUser($db, $id)
         ':user_id' => $id,
     ]);
 }
+
+
+function getUserByEmail($db, $user_email) {
+    $sql = 'SELECT * FROM users WHERE email = :user_email';
+    $stmt = $db->prepare($sql);
+    $stmt->execute([
+        ':user_email' => $user_email,
+    ]);
+    $user = $stmt->fetch();
+
+    var_dump($user);
+    
+
+    return $user;
+}
+
+function loginUser($callback){
+    $user_id= $callback['user_id'];
+    $user_name = $callback['user_name'];
+    $user_email= $callback['user_email'];
+
+    $_SESSION['user_id'] = $user_id;
+    $_SESSION['user_name'] = $user_name;
+    $_SESSION['user_email'] = $user_email;
+
+    Redirect('protected/index.php', false);
+}

@@ -1,9 +1,14 @@
 <?php
 
+session_start();
 require 'database/database_connection.php';
+include 'controller/UserController.php';
 require 'requests/UserRegisterRequest.php';
+require 'requests/UserLoginRequest.php';
+require 'helper/Helper.php';
 
 $db = connectToDatabase();
+
 
 $errors = [];
 $action = $_POST['action'] ?? '';
@@ -12,9 +17,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //Register Form
     if ($action === 'register') {
+        echo "register";
+        $callback = handleRegisterRequest($db);
 
-        $errors = handleRegisterRequest($db);
+        if(isset($callback['user_name']) && isset($callback['user_id'])){
+            $ok = true;
+            loginUser($callback);
+
+        }
+
     }
+
+    if ($action === 'login') {
+        $callback = handleLoginRequest($db);
+
+        if(isset($callback['user_name']) && isset($callback['user_id'])){
+            loginUser($callback);
+        }
+
+    }
+
 }
 
 ?>
@@ -27,6 +49,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anmelden</title>
+
+    <style>
+        .wrapper {
+            background: lightgray;
+        }
+
+        .form-group {
+            margin: 5px 10px;
+        }
+
+        .form-group > label {
+            display: block;
+        }
+
+        .form-group input {
+            margin: 5px 0;
+        }
+
+        .alert {
+            color: red;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -39,9 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="name">Dein benutzername</label>
             <input type="text" name="name" id="name">
 
-            <?php if (isset($errors['name'])) : ?>
+            <?php if (isset($callback['error_register_name'])) : ?>
                 <div class="alert">
-                    <?= $errors['name'] ?>
+                    <?= $callback['error_register_name'] ?>
                 </div>
             <?php endif; ?>
 
@@ -52,9 +97,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="email" id="email">
 
 
-            <?php if (isset($errors['email'])) : ?>
+            <?php if (isset($callback['error_register_email'])) : ?>
                 <div class="alert">
-                    <?= $errors['email'] ?>
+                    <?= $callback['error_register_email'] ?>
                 </div>
             <?php endif; ?>
 
@@ -64,9 +109,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="password">Dein Password</label>
             <input type="text" name="password" id="password">
 
-            <?php if (isset($errors['password'])) : ?>
+            <?php if (isset($callback['error_register_password'])) : ?>
                 <div class="alert">
-                    <?= $errors['password'] ?>
+                    <?= $callback['error_register_password'] ?>
                 </div>
             <?php endif; ?>
 
@@ -76,17 +121,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="repeat_password">Dein Passwort wiederholen</label>
             <input type="text" name="repeat_password" id="repeat_password">
 
-            <?php if (isset($errors['password'])) : ?>
+            <?php if (isset($callback['error_register_password'])) : ?>
                 <div class="alert">
-                    <?= $errors['password'] ?>
+                    <?= $callback['error_register_password'] ?>
                 </div>
             <?php endif; ?>
 
         </div>
 
-        <button type="submit" name="action" value="register">Absenden</button>
+       <div class="form-group">
+       <button type="submit" name="action" value="register">Absenden</button>
+       </div>
 
     </form>
+
+    <h1>Anmelden</h1>
+
+<form action="index.php" method="post">
+
+    <div class="form-group">
+        <label for="email">Deine E-Mail</label>
+        <input type="text" name="email" id="email">
+
+
+        <?php if (isset($callback['error_login_email'])) : ?>
+            <div class="alert">
+                <?= $callback['error_login_email'] ?>
+            </div>
+        <?php endif; ?>
+
+    </div>
+
+    <div class="form-group">
+        <label for="password">Dein Password</label>
+        <input type="text" name="password" id="password">
+
+        <?php if (isset($errocallbackrs['error_login_password'])) : ?>
+            <div class="alert">
+                <?= $callback['error_login_password'] ?>
+            </div>
+        <?php endif; ?>
+
+    </div>
+
+
+   <div class="form-group">
+    <button type="submit" name="action" value="login">Absenden</button>
+   </div>
+
+</form>
+
+    <?php if (isset($ok)) : ?>
+                <div class="alert">
+                   Du hast dich erfolgreich registriert!
+                </div>
+            <?php endif; ?>
+
 
 </body>
 
