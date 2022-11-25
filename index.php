@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //Register Form
     if ($action === 'register') {
-        echo "register";
         $callback = handleRegisterRequest($db);
 
         if(isset($callback['user_name']) && isset($callback['user_id'])){

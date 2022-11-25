@@ -37,6 +37,7 @@ function handleLoginRequest($db)
         }
     }else{
         $error['error_login_email'] = 'Bitte überprüfe deine Anmeldedaten!'; 
+        $error['error_login_password'] = 'Bitte überprüfe deine Anmeldedaten!'; 
     }
 
     return $error;
