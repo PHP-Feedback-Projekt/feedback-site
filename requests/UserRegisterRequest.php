@@ -2,7 +2,7 @@
 
 require './controller/UserController.php';
 
-function handleRequest($db)
+function handleRegisterRequest($db)
 {
     $user_name = $_POST['name'] ?? '';
     $user_email = $_POST['email'] ?? '';

@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //Register Form
     if ($action === 'register') {
 
-        $errors = handleRequest($db);
+        $errors = handleRegisterRequest($db);
     }
 }
 
