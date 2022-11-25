@@ -2,12 +2,23 @@
 
 require '../database/database_connection.php';
 
-$db = connectToDatabase();
+function createUser($db, $name, $email, $password) {
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-function createUser($name, $email, $password, $avatar) {
+    $sql = "INSERT INTO users (name, email, password) VALUES (:user_name, :user_email, :user_password)";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([
+        ':user_name' => $name,
+        ':user_email' => $email,
+        ':user_password' => $password_hash
+    ]);
 
 }
 
-function deleteUser($id){
-
+function deleteUser($db, $id){
+    $sql = 'DELETE FROM users WHERE id = :user_id';
+    $stmt = $db->prepare($sql);
+    $stmt->execute([
+        ':user_id' => $id,
+    ]);
 }
