@@ -2,8 +2,6 @@
 
 function connectToDatabase()
 {
-
-
     $host = 'localhost';
     $port = 3306;
     $charset = 'utf8mb4';
@@ -11,6 +9,7 @@ function connectToDatabase()
     $username = 'root';
     $password = '';
 
+    //data source name 
     $dsn = "mysql:host=$host;dbname=$database;charset=$charset;port=$port";
 
     $options = [
