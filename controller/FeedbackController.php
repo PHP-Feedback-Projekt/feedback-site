@@ -32,6 +32,20 @@ function deleteFBFromDB($db,$id)
   ]);
 
 }
+
+function updateFBinDB($db,$id,$new_feedback)
+{
+  $sql = 'UPDATE feedbacks 
+  SET feedback = :new_feedback 
+  WHERE id = :id ';
+
+  $stm = $db->prepare($sql);
+  $stm->execute([
+    ':new_feedback' => $new_feedback,
+    ':id' => $id,
+  ]);
+
+}
 // function deleteUser($db, $id)
 // {
 //     $sql = 'DELETE FROM users WHERE id = :user_id';

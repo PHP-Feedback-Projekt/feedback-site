@@ -16,6 +16,11 @@ $user_id = $_SESSION['user_id'];
 $user_name = $_SESSION['user_name'];
 $action = $_POST['action'] ?? '';
 $feedback_id = $_POST['feedbackID'] ?? '';
+$new_feedback = $_POST['feedback_edit']?? '';
+
+//var_dump($feedback_id);
+
+$edit = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -34,6 +39,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($action === 'delete') {
       deleteFBFromDB($db,$feedback_id);
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($action === 'edit') {
+      $edit = true;
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($action === 'save') { 
+      var_dump($feedback_id);
+      var_dump($new_feedback);
+      updateFBinDB($db,$feedback_id,$new_feedback);
     }
 }
 ?>
@@ -65,8 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1><?= "Herzlich willkommen $user_name mit der ID: $user_id" ?></h1>
 
     <?php $feedbacks = getfeedbacksfromdb($db);
-        if (isset($feedbacks)) : ?>
-
+    if (isset($feedbacks)) : ?>
     <div class="feedbacks">
       <div class="Flex-cont">
 
@@ -76,21 +94,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <p> Der Benutzer mit der ID: <?= $feedback["user_id"] ?> </p>
             <p> hat am <?= $feedback['created_at'] ?> folgender bewrtung geschrieben</p>
-            <p> <?= $feedback['feedback'] ?></p>
-            <p> TEST: <?= $feedback['id'] ?></p>
+
+            <?php if($edit && ($feedback_id == $feedback['id'])) : ?>
+               <form method="post">
+                <div class="speichern">
+                   <textarea name="feedback_edit" cols="30" rows="10"><?= $feedback['feedback'] ?></textarea>
+                   <input type="hidden" name="feedbackID" value="<?=   $feedback['id']?>" >
+                   <button type="submit" value="save"  name="action">speichern</button>
+                </div>
+              </form>
+            <?php else: ?>
+              <textarea name="feedback_old" cols="30" rows="10" readonly><?= $feedback['feedback'] ?></textarea>
+            <?php endif; ?>
 
             <form method="post">
-              <div class="Delete">
+              <div class="delete">
                 <input type="hidden" name="feedbackID" value="<?= $feedback['id']?>" >
-                <button type="submit" value="delete" 
-                name="action">löchen</button>
+                <button type="submit" value="delete" name="action">Löchen</button>
               </div>
             </form>
 
+            <form method="post">
+              <div class="edit">
+                <input type="hidden" name="feedbackID" value="<?= $feedback['id']?>" >
+                <button type="submit" value="edit" name="action">ändern</button>
+              </div>
+            </form>
           </div>
-
         <?php endforeach; ?>
-
       </div>
     </div>
     <?php endif; ?>
