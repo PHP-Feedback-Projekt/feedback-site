@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <?php if (isset($callback['error_register_name'])) : ?>
                                 <div class="alert">
-                                    <?= $callback['error_register_name'] ?>
+                                    <?= htmlspecialchars($callback['error_register_name']) ?>
                                 </div>
                             <?php endif; ?>
 
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <?php if (isset($callback['error_register_email'])) : ?>
                                 <div class="alert">
-                                    <?= $callback['error_register_email'] ?>
+                                    <?= htmlspecialchars($callback['error_register_email']) ?>
                                 </div>
                             <?php endif; ?>
 
@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <?php if (isset($callback['error_register_password'])) : ?>
                                 <div class="alert">
-                                    <?= $callback['error_register_password'] ?>
+                                    <?= htmlspecialchars($callback['error_register_password']) ?>
                                 </div>
                             <?php endif; ?>
 
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <?php if (isset($callback['error_register_password'])) : ?>
                                 <div class="alert">
-                                    <?= $callback['error_register_password'] ?>
+                                    <?= htmlspecialchars($callback['error_register_password']) ?>
                                 </div>
                             <?php endif; ?>
 
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <?php if (isset($callback['error_login_email'])) : ?>
                                 <div class="alert">
-                                    <?= $callback['error_login_email'] ?>
+                                    <?= htmlspecialchars($callback['error_login_email']) ?>
                                 </div>
                             <?php endif; ?>
 
@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <?php if (isset($callback['error_login_password'])) : ?>
                                 <div class="alert">
-                                    <?= $callback['error_login_password'] ?>
+                                    <?= htmlspecialchars($callback['error_login_password']) ?>
                                 </div>
                             <?php endif; ?>
 

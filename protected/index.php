@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="../assets/style/stars.css">
   <link rel="stylesheet" href="../assets/style/style.css">
-  <title>Document</title>
+  <title>Feedback | Home</title>
 </head>
 <style>
   .feedback-text{
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <nav>
     <div class="left clearfix">
-      <span><?= "Herzlich willkommen $user_name" ?></span>
+      <span><?= htmlspecialchars("Herzlich willkommen $user_name" )?></span>
     </div>
 
     <div class="right clearfix">
@@ -107,27 +107,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php foreach ($feedbacks as $feedback) : ?>
           <div class="grid-item item">
 
-            <p style="font-size: 20px; font-weight: bold; color: #2c3e50;">Feedback von <?= getUserByID($db, $feedback["user_id"])['name'] ?></p>
+            <p style="font-size: 20px; font-weight: bold; color: #2c3e50;">Feedback von <?= htmlspecialchars(getUserByID($db, $feedback["user_id"])['name']) ?></p>
 
             <div style="border-bottom: black 2px solid;">
               <div class="flex-container">
-                <span class="date"><?= $feedback['created_at'] ?></span>
+                <span class="date"><?= htmlspecialchars($feedback['created_at']) ?></span>
               </div>
 
               <div class="stars" style="margin-top: 10px;">
                 <?php $dynamic_class =  ($feedback['stars'] >= 1) ? 'checked' : ''; ?>
-                <span class="fa fa-star <?= $dynamic_class ?>"></span>
+                <span class="fa fa-star <?= htmlspecialchars($dynamic_class) ?>"></span>
                 <?php $dynamic_class =  ($feedback['stars'] >= 2) ? 'checked' : ''; ?>
-                <span class="fa fa-star <?= $dynamic_class ?>"></span>
+                <span class="fa fa-star <?= htmlspecialchars($dynamic_class) ?>"></span>
                 <?php $dynamic_class =  ($feedback['stars'] >= 3) ? 'checked' : ''; ?>
-                <span class="fa fa-star <?= $dynamic_class ?>"></span>
+                <span class="fa fa-star <?= htmlspecialchars($dynamic_class) ?>"></span>
                 <?php $dynamic_class =  ($feedback['stars'] >= 4) ? 'checked' : ''; ?>
-                <span class="fa fa-star <?= $dynamic_class ?>"></span>
+                <span class="fa fa-star <?= htmlspecialchars($dynamic_class) ?>"></span>
                 <?php $dynamic_class =  ($feedback['stars'] >= 5) ? 'checked' : ''; ?>
-                <span class="fa fa-star <?= $dynamic_class ?>"></span>
+                <span class="fa fa-star <?= htmlspecialchars($dynamic_class) ?>"></span>
               </div>
 
-              <p class="feedback-text"><?= $feedback['feedback'] ?></p>
+              <p class="feedback-text"><?= htmlspecialchars($feedback['feedback']) ?></p>
 
 
             </div>
@@ -146,19 +146,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                       <div class="body">
                         <span class="tip tip-up"></span>
                         <div class="message">
-                          <span><?= $comment['comment'] ?></span>
+                          <span><?= htmlspecialchars($comment['comment']) ?></span>
 
                           <div class="delete">
                             <div class="flex-container" style="height: 30px;">
 
                               <div class="flex-item-50" style="margin: 0; padding: 0;">
-                                <p style="font-size: 14px; font-weight: bold;">@ <?= getUserByID($db, $comment['user_id'])['name'] ?></p>
+                                <p style="font-size: 14px; font-weight: bold;">@ <?= htmlspecialchars(getUserByID($db, $comment['user_id'])['name']) ?></p>
                               </div>
 
                               <div class="flex-item-50" style="margin: 0; padding: 0;">
                                 <form method="post">
                                   <div class="delete">
-                                    <input type="hidden" name="commentID" value="<?= $comment['id'] ?>">
+                                    <input type="hidden" name="commentID" value="<?= htmlspecialchars($comment['id']) ?>">
                                     <button type="submit" value="delete_comment" name="action" style="background-color: transparent; outline: 0; border: 0; cursor: pointer;"><i class="fa fa-trash" style="color:#e74c3c; font-size: 20px;"></i></button>
                                   </div>
                                 </form>
@@ -181,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <form method="post">
 
                 <div class="form-group" style=" margin: 0">
-                  <input type="hidden" name="feedbackID" value="<?= $feedback['id'] ?>">
+                  <input type="hidden" name="feedbackID" value="<?= htmlspecialchars($feedback['id'] )?>">
                   <textarea name="comment" cols="5" rows="2" placeholder="Ihre Kommentar" style="min-width: 250px;"></textarea>
                 </div>
 
@@ -200,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <?php if ($user_id == $feedback["user_id"]) : ?>
                     <form method="post">
                       <div class="delete">
-                        <input type="hidden" name="feedbackID" value="<?= $feedback['id'] ?>">
+                        <input type="hidden" name="feedbackID" value="<?= htmlspecialchars($feedback['id']) ?>">
                         <button type="submit" value="delete" name="action" style="background-color: #e74c3c; color: #ecf0f1; font-weight: bold; border: 0; padding: 10px;">Löschen</button>
                       </div>
                     </form>
@@ -214,8 +214,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <?php if (!has_User_liked_this_fb($db, $feedback['id'], $user_id)) : ?>
                     <form method="post">
                       <div class="like">
-                        <input type="hidden" name="feedbackID" value="<?= $feedback['id'] ?>">
-                        <span style="display: block; font-size: 12px;"> <?= getlikesanzahl($db, $feedback["id"]) ?> gefällt dieser Beitrag</span>
+                        <input type="hidden" name="feedbackID" value="<?= htmlspecialchars($feedback['id'] )?>">
+                        <span style="display: block; font-size: 12px;"> <?= htmlspecialchars(getlikesanzahl($db, $feedback["id"])) ?> gefällt dieser Beitrag</span>
                         <button type="submit" value="like" name="action" style="background-color: transparent; border: 0; cursor: pointer;"><img src="../assets/img/Like.png" alt="" srcset="" height="25" width="25"></button>
                       </div>
                     </form>
@@ -224,8 +224,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <?php if (has_User_liked_this_fb($db, $feedback['id'], $user_id)) : ?>
                     <form method="post">
                       <div class="dislike">
-                        <input type="hidden" name="feedbackID" value="<?= $feedback['id'] ?>">
-                        <span style="display: block; font-size: 12px;"><?= getlikesanzahl($db, $feedback["id"]) === 1 ? 'Dir gefällt dieser Beitrag': 'Dir und' .  getlikesanzahl($db, $feedback["id"]) . ' gefällt dieser Beitrag' ?></span>
+                        <input type="hidden" name="feedbackID" value="<?= htmlspecialchars($feedback['id'] )?>">
+                        <span style="display: block; font-size: 12px;"><?= htmlspecialchars(getlikesanzahl($db, $feedback["id"]) === 1 ? 'Dir gefällt dieser Beitrag': 'Dir und' .  getlikesanzahl($db, $feedback["id"]) . ' gefällt dieser Beitrag') ?></span>
                         <button type="submit" value="dislike" name="action" style="background-color: transparent; border: 0; cursor: pointer;"><img src="../assets/img/Dislike.png" alt="" srcset="" height="25" width="25"></button>
                       </div>
                     </form>
@@ -293,7 +293,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
       <?php if (isset($callback['feedback_error'])) { ?>
         <div class="alert">
-          <p style="font-size: 15px; font-weight: bold;"> <?= $callback['feedback_error']; ?> </p>
+          <p style="font-size: 15px; font-weight: bold;"> <?= htmlspecialchars($callback['feedback_error'])?> </p>
         </div>
       <?php }
       if (isset($callback['user_feedback'])) {  ?>
