@@ -64,11 +64,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="../assets/style/stars.css">
   <link rel="stylesheet" href="../assets/style/style.css">
   <title>Document</title>
 </head>
+<style>
+  .feedback-text{
+    /* width: 200px;
+    height: 50px; */
+    color: #2c3e50;
+    font-size: 16px;
+    border: 1px solid black;
+    word-wrap: break-word; 
+    padding: 16px;
+    margin: 16px;
+    background-color: #bdc3c7;
+  }
+</style>
 
 <body>
 
@@ -115,9 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <span class="fa fa-star <?= $dynamic_class ?>"></span>
               </div>
 
-              <div style="color: #2c3e50; font-weight: bold;">
-                <p style="font-size: 16px;"><?= $feedback['feedback'] ?></p>
-              </div>
+              <p class="feedback-text"><?= $feedback['feedback'] ?></p>
 
 
             </div>

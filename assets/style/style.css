@@ -149,6 +149,7 @@ textarea {
     border: 0;
     padding: 12px;
     min-width: 300px; 
+    word-wrap: break-word;
 }
 
 input:focus{
@@ -165,10 +166,13 @@ span.date{
     padding: 8px;
 }
   .grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
+    /* display: grid;
+    grid-template-columns: auto auto auto; */
+    display: flex;
+    flex-direction: row;
     padding: 20px;
     width: 75%;
+    flex-wrap: wrap;
   }
 
   .clearfix::after {
@@ -181,9 +185,11 @@ span.date{
     background-color: rgba(255, 255, 255, 0.8);
     margin: 5px;
     text-align: center;
-    height: auto;
-    grid-row: 1 / span 2;
-   
+    height: 500px;
+    width: 400px;
+    overflow-y: auto;
+    overflow-x: initial;
+    /* grid-row: 1 / span 2; */
   }
 
   .flex-container {
@@ -255,6 +261,7 @@ span.date{
     background-color: #DADADA;
     border-radius: 3px;
     border: 5px solid #ccc;
+    word-wrap: break-word;
   }
 
 
@@ -270,4 +277,13 @@ span.date{
 
   .item p {
     font-size: 20px;
+  }
+  .feedback-text{
+    color: #2c3e50;
+    font-size: 16px;
+    border: 1px solid black;
+    word-wrap: break-word; 
+    padding: 16px;
+    margin: 16px;
+    background-color: #bdc3c7;
   }
