@@ -216,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                       <div class="like">
                         <input type="hidden" name="feedbackID" value="<?= $feedback['id'] ?>">
                         <span style="display: block; font-size: 12px;"> <?= getlikesanzahl($db, $feedback["id"]) ?> gefällt dieser Beitrag</span>
-                        <button type="submit" value="like" name="action" style="background-color: transparent; border: 0; cursor: pointer;"><img src="../assets/img/Like.png" alt="" srcset=""></button>
+                        <button type="submit" value="like" name="action" style="background-color: transparent; border: 0; cursor: pointer;"><img src="../assets/img/Like.png" alt="" srcset="" height="25" width="25"></button>
                       </div>
                     </form>
                   <?php endif; ?>
@@ -226,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                       <div class="dislike">
                         <input type="hidden" name="feedbackID" value="<?= $feedback['id'] ?>">
                         <span style="display: block; font-size: 12px;"><?= getlikesanzahl($db, $feedback["id"]) === 1 ? 'Dir gefällt dieser Beitrag': 'Dir und' .  getlikesanzahl($db, $feedback["id"]) . ' gefällt dieser Beitrag' ?></span>
-                        <button type="submit" value="dislike" name="action" style="background-color: transparent; border: 0; cursor: pointer;"><img src="../assets/img/Dislike.png" alt="" srcset=""></button>
+                        <button type="submit" value="dislike" name="action" style="background-color: transparent; border: 0; cursor: pointer;"><img src="../assets/img/Dislike.png" alt="" srcset="" height="25" width="25"></button>
                       </div>
                     </form>
                   <?php endif; ?>
