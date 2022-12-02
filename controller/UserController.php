@@ -39,6 +39,19 @@ function getUserByEmail($db, $user_email) {
     return $user;
 }
 
+function getUserByID($db, $user_id) {
+    $sql = 'SELECT * FROM users WHERE id = :user_id';
+    $stmt = $db->prepare($sql);
+    $stmt->execute([
+        ':user_id' => $user_id,
+    ]);
+    $user = $stmt->fetch();
+    
+
+    return $user;
+}
+
+
 function loginUser($callback){
     $user_id= $callback['user_id'];
     $user_name = $callback['user_name'];

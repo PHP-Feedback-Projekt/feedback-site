@@ -7,7 +7,7 @@ function handelfeedbackRequist($db)
   $error = [];
   $user_feedback = $_POST['feedback'] ?? '';
   $user_id = $_SESSION['user_id'];
-  $stars = $_POST['rating']?? '';
+  $stars = $_POST['rating']?? 0;
   
   if (mb_strlen($user_feedback) < 2)
     $error['feedback_error'] = 'Die Eingabe soll minsestens Zwei buchstabe haben';
