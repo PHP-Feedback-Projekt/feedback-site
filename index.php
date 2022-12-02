@@ -46,96 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style/style.css">
     <title>Anmelden</title>
-
-    <style>
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'font-family: 'Roboto', sans-serif;';
-        }
-
-        .wrapper {
-            background: lightgray;
-        }
-
-        .form-group {
-            margin: 30px 10px;
-        }
-
-        .form-group>label {
-            display: block;
-        }
-
-        .form-group input {
-            margin: 5px 0;
-        }
-
-        .alert {
-            color: red;
-        }
-
-        .flex-container {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
-            align-content: center;
-        }
-
-        .flex-item-50 {
-
-            padding: 5px;
-            flex: 50%;
-            margin: 25px;
-
-        }
-
-        .parent {
-            display: grid;
-        }
-
-        .child {
-            margin: auto;
-        }
-
-        .item {
-            background-color: white;
-            -webkit-box-shadow: 0px 0px 25px -1px rgba(0, 0, 0, 0.47);
-            box-shadow: 0px 0px 25px -1px rgba(0, 0, 0, 0.47);
-            text-align: center;
-            border-bottom: #2c3e50 4px solid;
-            border-radius: 5px;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        button {
-            margin-top: 20px;
-            padding: 12px;
-            border: 0;
-            background-color: #2c3e50;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        input {
-            background-color: #bdc3c7;
-            border: 0;
-            padding: 12px;
-            min-width: 300px;
-        }
-
-        input:focus{
-            outline: 0;
-            color: #2c3e50;
-            font-weight: bold;
-        }
-
-    </style>
-
 </head>
 
 <body>
@@ -201,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" name="action" value="register">Absenden</button>
+                            <button type="submit" name="action" value="register" class="default-btn">Absenden</button>
                         </div>
 
                     </form>
@@ -247,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
                         <div class="form-group">
-                            <button type="submit" name="action" value="login">Absenden</button>
+                            <button type="submit" name="action" value="login"  class="default-btn">Absenden</button>
                         </div>
 
                     </form>

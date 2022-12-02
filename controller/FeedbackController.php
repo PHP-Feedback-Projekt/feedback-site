@@ -3,16 +3,17 @@
 function createfeedback($db, $feedbacktxt, $user_id , $stars)
 {
   $sql = "INSERT INTO feedbacks
-   (user_id , feedback, created_at , updated_at, stars)
+   (user_id , feedback, stars)
     VALUES
-   (:user_id , :feedbacktxt, :created_at, :updated_at, :stars)";
+   (:user_id , :feedbacktxt, :stars)";
 
   $stm = $db->prepare($sql);
+
+
   $result = $stm->execute([
     ':user_id' => $user_id,
     ':feedbacktxt' => $feedbacktxt,
-    ':created_at'  => date("y-m-d-h:i:S"),
-    ':updated_at'  => date("y-m-d-h:i:S"),
+
     ':stars' => $stars
   ]);
   return $result;
@@ -127,24 +128,22 @@ function getlikesanzahl ($db, $feedback_id)
 function add_New_comment_to_the_db($db, $user_id, $feedback_id, $commenttxt)
 {
    $sql = "INSERT INTO comments
-   ( feedback_id , user_id , comment, created_at , updated_at)
+   ( feedback_id , user_id , comment)
     VALUES
-   (:feedback_id ,:user_id , :comment, :created_at, :updated_at)";
+   (:feedback_id ,:user_id , :comment)";
 
   $stm = $db->prepare($sql);
   $result = $stm->execute([
     ':feedback_id' => $feedback_id,
     ':user_id' => $user_id,
     ':comment' => $commenttxt,
-    ':created_at'  => date("y-m-d-h:i:S"),
-    ':updated_at'  => date("y-m-d-h:i:S"),
   ]);
   return $result;
 }
 
 function get_all_comments_from_db($db, $feedback_id)
 {
-  $sql = "SELECT id,comment
+  $sql = "SELECT *
   FROM comments
   WHERE feedback_id = $feedback_id";
 
